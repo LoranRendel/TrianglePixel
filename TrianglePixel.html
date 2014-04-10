@@ -4,7 +4,9 @@
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
 			$(document).ready(function () {
-				$("#container").css("width", $( window ).width()+50);				
+				$("#container").css("width", $(document).width()+50);
+				$("#container").css("height", $(document).height()+50);	
+
 				generatePicture();
 				$('body').click(function () {				
 				updateColors();				
