@@ -1,4 +1,4 @@
-It's an HTML-page that generates a simple picture.
+It's an HTML page that generates a simple picture.
 
 Example:
 
