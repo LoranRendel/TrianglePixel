@@ -4,8 +4,12 @@
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
 			$(document).ready(function () {
-				generatePicture();			
-			});			
+				generatePicture();
+				$('body').click(function () {				
+				updateColors();				
+				});	
+			});	
+					
 			function generatePicture() {
 				var cont = document.getElementById("container");
 				var contWidth = 1000;
@@ -18,7 +22,22 @@
 					innerHTML += b;					
 				}
 				cont.innerHTML = innerHTML;
-			}			
+			}
+			function updateColors()
+			{
+				$(".top-triangle").each(function () {
+					$(this).css("border-top", "25px solid #" + randomString(6, '0123456789abcdef'));
+				})
+				$(".bottom-triangle").each(function () {
+					$(this).css("border-bottom", "25px solid #" + randomString(6, '0123456789abcdef'));
+				})
+				$(".left-triangle").each(function () {
+					$(this).css("border-left", "25px solid #" + randomString(6, '0123456789abcdef'));
+				})
+				$(".right-triangle").each(function () {
+					$(this).css("border-right", "25px solid #" + randomString(6, '0123456789abcdef'));
+				})
+			}
 			function randomString(len, charSet) {
 				charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 				var randomString = '';
