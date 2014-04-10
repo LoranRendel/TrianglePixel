@@ -16,8 +16,8 @@
 				for(var i =0; i< blocksNumber; i++){
 					var b = "<div class=\"divided\" style=\"position: relative; float:left;	width: 50px; height: 50px;\"><div class=\"top-triangle\" style=\"position: absolute; top: 0; width: 0; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"bottom-triangle\" style=\"position: absolute;bottom: 0;width: 0;height: 0;border-left: 25px solid transparent;border-right: 25px solid transparent;border-bottom: 25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"left-triangle\" style=\"left: 0;top: 0;width: 0;height: 0;border-top: 25px solid transparent;border-bottom: 25px solid transparent;border-left:25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"right-triangle\" style=\"position: absolute;right: 0;top: 0;width: 0;height: 0;border-top: 25px solid transparent;border-bottom: 25px solid transparent;border-right:25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div></div>"
 					innerHTML += b;					
-					cont.innerHTML = innerHTML;
 				}
+				cont.innerHTML = innerHTML;
 			}			
 			function randomString(len, charSet) {
 				charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
