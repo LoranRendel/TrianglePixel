@@ -3,54 +3,52 @@
 	<head>
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
-			var timeout;					
+			var timeout;			
 			$(document).ready(function () {
-				initilize();
-				generatePicture();
+				var blockSize = 40;
+				var container = document.getElementById("container");
+				maximizeContainer(container, blockSize);
+				generatePicture(container, blockSize);				
 				$('body').click(function () {				
-				updateColors();				
+				updateColors(container, blockSize);				
 				});				
 				$(window).resize(function() {
 					 clearTimeout(timeout);
-					 timeout = setTimeout(resizeend, 200);
+					 timeout = setTimeout(resizeend, 100);
 				});
 				function resizeend() {					
-					initilize();
-					generatePicture();			
+					maximizeContainer(container, blockSize);
+					generatePicture(container, blockSize);			
 				}
 			});	
-			function initilize(){
-				var cont = document.getElementById("container");
-				cont.innerHTML = "";
-				$("#container").css("width", $(document).width()+50);
-				$("#container").css("height", $(document).height()+50);
+			function maximizeContainer(container, blockSize){							
+				container.innerHTML = "";
+				container.setAttribute("style", "position: fixed; left: 0; top: 0; width: "+($(document).width()+blockSize)+"; height: "+($(document).height()+blockSize)+";");				
 			}	
-			function generatePicture() {
-				var cont = document.getElementById("container");
-				var contWidth = $("#container").width();
-				var contHeight = $("#container").height();
-				var blockWidth = 50;
+			function generatePicture(container, blockSize) {				
+				var contWidth = $("#"+container.id).width();
+				var contHeight = $("#"+container.id).height();
+				var blockWidth = blockSize;
 				var blocksNumber = Math.floor(contHeight/blockWidth)*Math.floor(contWidth/blockWidth);				
 				var innerHTML = "";
 				for(var i =0; i< blocksNumber; i++){
-					var b = "<div class=\"divided\" style=\"position: relative; float:left;	width: 50px; height: 50px;\"><div class=\"top-triangle\" style=\"position: absolute; top: 0; width: 0; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"bottom-triangle\" style=\"position: absolute;bottom: 0;width: 0;height: 0;border-left: 25px solid transparent;border-right: 25px solid transparent;border-bottom: 25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"left-triangle\" style=\"left: 0;top: 0;width: 0;height: 0;border-top: 25px solid transparent;border-bottom: 25px solid transparent;border-left:25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"right-triangle\" style=\"position: absolute;right: 0;top: 0;width: 0;height: 0;border-top: 25px solid transparent;border-bottom: 25px solid transparent;border-right:25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div></div>"
+					var b = "<div class=\"divided\" style=\"position: relative; float:left;	width: "+blockSize+"px; height: "+blockSize+"px;\"><div class=\"top-triangle\" style=\"position: absolute; top: 0; width: 0; height: 0; border-left: "+Math.floor(blockSize/2)+"px solid transparent; border-right: "+Math.floor(blockSize/2)+"px solid transparent; border-top: "+Math.floor(blockSize/2)+"px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"bottom-triangle\" style=\"position: absolute;bottom: 0;width: 0;height: 0;border-left: "+Math.floor(blockSize/2)+"px solid transparent;border-right: "+Math.floor(blockSize/2)+"px solid transparent;border-bottom: "+Math.floor(blockSize/2)+"px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"left-triangle\" style=\"left: 0;top: 0;width: 0;height: 0;border-top: "+Math.floor(blockSize/2)+"px solid transparent;border-bottom: "+Math.floor(blockSize/2)+"px solid transparent;border-left:"+Math.floor(blockSize/2)+"px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"right-triangle\" style=\"position: absolute;right: 0;top: 0;width: 0;height: 0;border-top: "+Math.floor(blockSize/2)+"px solid transparent;border-bottom: "+Math.floor(blockSize/2)+"px solid transparent;border-right:"+Math.floor(blockSize/2)+"px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div></div>"
 					innerHTML += b;					
 				}
-				cont.innerHTML = innerHTML;
+				container.innerHTML = innerHTML;
 			}
-			function updateColors()
-			{
-				$(".top-triangle").each(function () {
-					$(this).css("border-top", "25px solid #" + randomString(6, '0123456789abcdef'));
+			function updateColors(container, blockSize)	{				
+				$("#"+container.id+" .top-triangle").each(function () {
+					$(this).css("border-top", Math.floor(blockSize/2)+"px solid #" + randomString(6, '0123456789abcdef'));
 				})
-				$(".bottom-triangle").each(function () {
-					$(this).css("border-bottom", "25px solid #" + randomString(6, '0123456789abcdef'));
+				$("#"+container.id+" .bottom-triangle").each(function () {
+					$(this).css("border-bottom", Math.floor(blockSize/2)+"px solid #" + randomString(6, '0123456789abcdef'));
 				})
-				$(".left-triangle").each(function () {
-					$(this).css("border-left", "25px solid #" + randomString(6, '0123456789abcdef'));
+				$("#"+container.id+" .left-triangle").each(function () {
+					$(this).css("border-left", Math.floor(blockSize/2)+"px solid #" + randomString(6, '0123456789abcdef'));
 				})
-				$(".right-triangle").each(function () {
-					$(this).css("border-right", "25px solid #" + randomString(6, '0123456789abcdef'));
+				$("#"+container.id+" .right-triangle").each(function () {
+					$(this).css("border-right", Math.floor(blockSize/2)+"px solid #" + randomString(6, '0123456789abcdef'));
 				})
 			}
 			function randomString(len, charSet) {
@@ -66,6 +64,7 @@
 		<title>Triangles</title>		
 	</head>
 	<body>
-		<div id="container" style="position: fixed; left: 0; top: 0;	width: 100%; height: 100%;"></div>
+		<div id="container"></div>
+		
 	</body>
 </html>
