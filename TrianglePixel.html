@@ -3,16 +3,28 @@
 	<head>
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
+			var timeout;					
 			$(document).ready(function () {
-				$("#container").css("width", $(document).width()+50);
-				$("#container").css("height", $(document).height()+50);	
-
+				initilize();
 				generatePicture();
 				$('body').click(function () {				
 				updateColors();				
-				});	
+				});				
+				$(window).resize(function() {
+					 clearTimeout(timeout);
+					 timeout = setTimeout(resizeend, 200);
+				});
+				function resizeend() {					
+					initilize();
+					generatePicture();			
+				}
 			});	
-					
+			function initilize(){
+				var cont = document.getElementById("container");
+				cont.innerHTML = "";
+				$("#container").css("width", $(document).width()+50);
+				$("#container").css("height", $(document).height()+50);
+			}	
 			function generatePicture() {
 				var cont = document.getElementById("container");
 				var contWidth = $("#container").width();
