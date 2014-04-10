@@ -1,0 +1,37 @@
+<!DOCTYPE html5>
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				generatePicture();			
+			});			
+			function generatePicture() {
+				var cont = document.getElementById("container");
+				var contWidth = 1000;
+				var contHeight = $("#container").height();
+				var blockWidth = 50;
+				var blocksNumber = Math.floor(contHeight/blockWidth)*Math.floor(contWidth/blockWidth);				
+				var innerHTML = "";
+				for(var i =0; i< blocksNumber; i++){
+					var b = "<div class=\"divided\" style=\"position: relative; float:left;	width: 50px; height: 50px;\"><div class=\"top-triangle\" style=\"position: absolute; top: 0; width: 0; height: 0; border-left: 25px solid transparent; border-right: 25px solid transparent; border-top: 25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"bottom-triangle\" style=\"position: absolute;bottom: 0;width: 0;height: 0;border-left: 25px solid transparent;border-right: 25px solid transparent;border-bottom: 25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"left-triangle\" style=\"left: 0;top: 0;width: 0;height: 0;border-top: 25px solid transparent;border-bottom: 25px solid transparent;border-left:25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div><div class=\"right-triangle\" style=\"position: absolute;right: 0;top: 0;width: 0;height: 0;border-top: 25px solid transparent;border-bottom: 25px solid transparent;border-right:25px solid "+"#"+randomString(6, '0123456789abcdef')+";"+"\"></div></div>"
+					innerHTML += b;					
+					cont.innerHTML = innerHTML;
+				}
+			}			
+			function randomString(len, charSet) {
+				charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+				var randomString = '';
+				for (var i = 0; i < len; i++) {
+					var randomPoz = Math.floor(Math.random() * charSet.length);
+					randomString += charSet.substring(randomPoz, randomPoz + 1);
+				}
+				return randomString;
+			}
+		</script>
+		<title>Triangles</title>		
+	</head>
+	<body>
+		<div id="container" style="position: absolute; left: 0; top: 0;	width: 1000px; height: 100%;"></div>
+	</body>
+</html>
