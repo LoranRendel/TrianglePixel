@@ -1,6 +1,7 @@
-<!DOCTYPE html5>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="UTF-8">
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
 			var timeout;			
@@ -23,7 +24,7 @@
 			});	
 			function maximizeContainer(container, blockSize){							
 				container.innerHTML = "";
-				container.setAttribute("style", "position: fixed; left: 0; top: 0; width: "+($(document).width()+blockSize)+"; height: "+($(document).height()+blockSize)+";");				
+				$("#"+container.id).attr("style", "position: fixed; left: 0; top: 0; width: "+($(document).width()+blockSize)+"px; height: "+($(document).height()+blockSize)+"px;");			
 			}	
 			function generatePicture(container, blockSize) {				
 				var contWidth = $("#"+container.id).width();
@@ -64,7 +65,6 @@
 		<title>Triangles</title>		
 	</head>
 	<body>
-		<div id="container"></div>
-		
+		<div id="container"></div>		
 	</body>
 </html>
