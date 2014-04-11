@@ -4,10 +4,11 @@
 		<meta charset="UTF-8">
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script>
-			var timeout;			
+			var timeout;
+			var minimalBlockSize = 20;
 			$(document).ready(function () {
-				var blockSize = 40;
-				var container = document.getElementById("container");
+				var blockSize = 98;
+				var container = document.getElementById("container");				
 				maximizeContainer(container, blockSize);
 				generatePicture(container, blockSize);				
 				$('body').click(function () {				
@@ -22,11 +23,17 @@
 					generatePicture(container, blockSize);			
 				}
 			});	
-			function maximizeContainer(container, blockSize){							
+			function maximizeContainer(container, blockSize){
+				if(container == null || !container.getAttribute || blockSize == null || (typeof blockSize) != 'number'|| blockSize <minimalBlockSize) {
+					return;
+				}				
 				container.innerHTML = "";
 				$("#"+container.id).attr("style", "position: fixed; left: 0; top: 0; width: "+($(document).width()+blockSize)+"px; height: "+($(document).height()+blockSize)+"px;");			
 			}	
-			function generatePicture(container, blockSize) {				
+			function generatePicture(container, blockSize) {
+				if(container == null || !container.getAttribute || blockSize == null || (typeof blockSize) != 'number'|| blockSize <minimalBlockSize) {
+					return;
+				}	
 				var contWidth = $("#"+container.id).width();
 				var contHeight = $("#"+container.id).height();
 				var blockWidth = blockSize;
@@ -38,7 +45,10 @@
 				}
 				container.innerHTML = innerHTML;
 			}
-			function updateColors(container, blockSize)	{				
+			function updateColors(container, blockSize)	{
+				if(container == null || !container.getAttribute || blockSize == null || (typeof blockSize) != 'number'|| blockSize <minimalBlockSize) {
+					return;
+				}
 				$("#"+container.id+" .top-triangle").each(function () {
 					$(this).css("border-top", Math.floor(blockSize/2)+"px solid #" + randomString(6, '0123456789abcdef'));
 				})
